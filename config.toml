@@ -1,0 +1,13 @@
+# Site settings
+baseurl = "/"
+languageCode = "en"
+#title = "Document blog"
+theme = "hugo-theme-cactus-plus"
+#googleAnalytics = "your_google_analytics_id"
+# Set the value to true if your site include CJK (Chinese, Japanese, and Korean languages) characters
+hasCJKLanguage = true
+
+[params]
+	#author = "site_author"
+	#description = "Site Description"
+	bio = "More is different"
