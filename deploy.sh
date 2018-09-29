@@ -2,7 +2,7 @@
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
 
-rm -rf ./public
+find ./public -type f -name '*.html' -exec rm {} \;
 
 # Build the project.
 hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
