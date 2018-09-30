@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		
+		
+		<meta name="generator" content="Hugo 0.48" />
+		<title>常见问题及解答 &middot; </title>
+		<link rel="shortcut icon" href="/images/favicon.ico">
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="/css/highlight.css">
+
+		
+		<link rel="stylesheet" href="/css/monosocialiconsfont.css">
+		
+
+		
+
+		
+	</head>
+
+    <body>
+       <nav class="main-nav">
+	
+	
+		<a href='/'> <span class="arrow">←</span>Home</a>
+	
+	<a href='/posts'>Archive</a>
+	<a href='/tags'>Tags</a>
+	<a href='/about'>About</a>
+
+	
+
+	
+</nav>
+
+
+        <section id="wrapper" class="post">
+            <article>
+                <header>
+                    <h1>
+                        常见问题及解答
+                    </h1>
+                    <h2 class="headline">
+                    Sep 19, 2018 00:00
+                    · 220 words
+                    · 1 minute read
+                      <span class="tags">
+                      
+                      
+                          
+                              <a href="/tags/cluster">cluster</a>
+                          
+                              <a href="/tags/vasp">vasp</a>
+                          
+                              <a href="/tags/pyyabc">pyyabc</a>
+                          
+                      
+                      
+                      </span>
+                    </h2>
+                </header>
+                
+                <section id="post-body">
+                    <p></p>
+
+<h2 id="q1-vasp计算时出现强制退出-内存爆炸的问题">Q1: VASP计算时出现强制退出, 内存爆炸的问题</h2>
+
+<h2 id="a1-可以通过修改-barshrc-文件">A1: 可以通过修改<code>~/.barshrc</code>文件</h2>
+
+<h3 id="用户-bashrc-配置">用户<code>~/.bashrc</code>配置</h3>
+
+<p>为使得VASP进行计算时能够处理打文件读写，用户将自己的文件句柄加大到<code>unlimited</code>，
+增加<code>ulimit -s unlimited</code>，
+修改后的<code>~/.bashrc</code>为：</p>
+
+<pre><code class="language-bash"># .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+        . /etc/bashrc
+fi
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:                                                                            
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+ulimit -s unlimited
+</code></pre>
+
+<p>我们建议不要修改<code>~/.barshrc</code>文件, 除了自己的脚本和独特的软件,
+<span style="color:red"><strong><em>切勿修改</em></strong><code>~/.bashrc</code></span></p>
+                </section>
+            </article>
+
+            
+
+            
+
+            
+
+            <footer id="footer">
+    
+    <p class="small">
+    
+       © Copyright 2018 <i class="fa fa-heart" aria-hidden="true"></i> 
+    
+    </p>
+    <p class="small">
+        Powered by <a href="http://www.gohugo.io/">Hugo</a> Theme By <a href="https://github.com/nodejh/hugo-theme-cactus-plus">nodejh</a>
+    </p>
+</footer>
+
+        </section>
+
+        <script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+    </body>
+</html>
