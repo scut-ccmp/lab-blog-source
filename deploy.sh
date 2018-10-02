@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
-rm -rf  public/post
+rm -rf  public/post*
 find ./public -type f -name '*.html' -exec rm {} \;
 find ./public -type f -name '*.xml' -exec rm {} \;
 cd public
