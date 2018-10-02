@@ -37,6 +37,8 @@ cmp集群提供给新生和有折腾意愿的同学和老师使用。将来会�
 
 `sinfo -Nel`可以查看更多的信息, 更多可参见[这里](http://geco.mines.edu/prototype/manpages/sinfo.html).
 
+## 赝势所在路径
+``/opt/ohpc/pub/apps/vasp/pps``
 
 ## 任务管理系统`SLURM`使用
 
