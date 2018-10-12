@@ -117,7 +117,7 @@ www-data docker
 关联容器的`80`端口和本地的`8080`端口。从而host主页地址<ip-address>:8080，可以通过这个地址访问网站：
 
 ```sh
-[www-data@ccmp ~]$ docker run --name server-nginx \
+[www-data@ccmp ~]$ docker run --name server-nginx --restart always \
  -v /home/www-data/server-html:/usr/share/nginx/html:ro -p 8080:80 -d nginx
 ```
 
