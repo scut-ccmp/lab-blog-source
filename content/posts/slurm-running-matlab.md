@@ -7,6 +7,7 @@ date:  2018-05-21
 tags:
   - cluster
   - matlab
+author: unkcpz
 ---
 
 ## 以任务的方式提交matlab任务(recommoned)

@@ -4,6 +4,7 @@ Description = ""
 Tags = ["nginx", "docker", "server"]
 Categories = ["tutorial"]
 date = 2018-10-12
+author = "unkcpz"
 +++
 
 ## Docker Nginx 网页服务搭建

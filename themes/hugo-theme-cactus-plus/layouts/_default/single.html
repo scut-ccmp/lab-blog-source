@@ -21,6 +21,9 @@
                       {{ end }}
                       {{ end}}
                       </span>
+                      {{ with .Params.author }}
+                      Author: <span>{{ . }}</span>
+                      {{ end }}
                     </h2>
                 </header>
                 {{ if .Site.Params.enableToc }}
