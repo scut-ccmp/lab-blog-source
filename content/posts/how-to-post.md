@@ -13,11 +13,11 @@ Categories = ["tutorial"]
 `.md`文件用于发布。`Markdown`格式简单，易于编辑和修改，可以对特定的公式和代码块进行格式处理和
 高亮，是非常简单易用的文本发布格式。
 
-这篇post的源代码在[source-code]()处查看。
+这篇post的源代码在[source-code](https://raw.githubusercontent.com/scut-ccmp/lab-blog-source/master/content/posts/how-to-post.md)处查看。
 
 ### `markdown`的语法和亮片
 
-具体使用的详情请参考[md ref01]()， [md ref02]()。
+具体使用的详情请参考[md tutorial](https://www.markdowntutorial.com/)， [md official](https://daringfireball.net/projects/markdown/)。
 下面只介绍最为常用的一些模式。
 
 ### 公式的编辑
