@@ -32,5 +32,5 @@ fi
 ulimit -s unlimited
 ```
 
-我们建议不要修改`~/.barshrc`文件, 除了自己的脚本和独特的软件,
-<span style="color:red">***切勿修改***`~/.bashrc`</span>
+除了自己的脚本和独特的软件,
+<span style="color:red">***切勿修改***`~/.bashrc`</span>!!!

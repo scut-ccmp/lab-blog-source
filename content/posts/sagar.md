@@ -6,15 +6,10 @@ Categories = ["manual"]
 date = 2018-10-10
 +++
 
-## Sagar
+# Sagar
 
-### 仓库地址
 
-[](https://github.com/scut-ccmp/sagar)
-
-### 手册地址
-
-[](https://sagar.readthedocs.io)
+[仓库地址](https://github.com/scut-ccmp/sagar), [手册地址](https://sagar.readthedocs.io)
 
 ### 开发协助
 
