@@ -4,6 +4,7 @@ date = "2018-10-24"
 Categories = ["info"]
 Tags = ["doc", "cluster"]
 Description = ""
+author = "unkcpz, qiusb"
 +++
 
 ## 帐号密钥申请和管理指南
@@ -25,5 +26,12 @@ Description = ""
 同时将key上传到[ftp-key](ftp://202.38.220.12/key)中，放置在该目录下面，
 命名为`<account>.key`，如yjzhao_1的key，
 命名为`yjzhao_1.key`，该目录只有写权限没有读权限。
+
+### windows用户
+可以直接打开我的电脑输入`ftp://202.38.220.12`并拖拽上传文件，向`key`目录上传后将不会看到
+该文件，请勿重复上传。
+
+### 其他用户
+使用ftp客户端软件匿名登录该站点，并执行上传。
 
 上述ftp地址只能在校园网中访问。
