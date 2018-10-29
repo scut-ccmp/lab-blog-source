@@ -18,7 +18,7 @@ author = "unkcpz, qiusb"
 ```
 其中的`nodeinfo.sh`保存的是每一个计算节点的bmc和通信ip信息。
 
-循环关闭每个节点：
+循环开启每个节点：
 ```sh
 [root] # for ((i=0; i<${num_computes}; i++)) ; do
             do ipmitool -E -I lanplus -H ${c_bmc[$i]} -U ${bmc_username} chassis power reset
@@ -37,6 +37,11 @@ author = "unkcpz, qiusb"
 [root] # for ((i=0; i<${num_computes}; i++)) ; do
             pdsh -w ${c_name[$i]} systemctl start slurmd
           done
+```
+
+再开启管理节点`slurmctld`服务：
+```sh
+[root] # systemctl restart slurmctld
 ```
 
 （optional？）按节点开启节点检查(health check)
