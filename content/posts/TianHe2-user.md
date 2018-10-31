@@ -27,6 +27,8 @@ author = "unkcpz, qiusb"
 命名为`<account>.key`，如yjzhao_1的key，
 命名为`yjzhao_1.key`，该目录只有写权限没有读权限。
 
+*ftp的帐号密码均为:shop*
+
 ### windows用户
 可以直接打开我的电脑输入`ftp://202.38.220.12`并拖拽上传文件，向`key`目录上传后将不会看到
 该文件，请勿重复上传。
