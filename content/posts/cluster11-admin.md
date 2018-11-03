@@ -39,4 +39,22 @@ rm -rf dirname #删除数据
 查看passwd是为了再次确认要删除该用户，接下来是找到与该用户有关的文件，并彻底删除。
 
 
+### 关闭某计算节点
+```
+[root] # qmod -d all.q@compute-0-1.local
+```
+
+### hpc开机
+第一步， 去楼下开机。。。。。。
+
+
+### hpc关机
+关闭计算节点
+```
+[root] # rocks run host halt
+```
+关闭登录节点
+```
+[root] # shutdown -h now
+```
 
