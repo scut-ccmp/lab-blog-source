@@ -8,7 +8,7 @@ author = "unkcpz, qiusb"
 +++
 
 ### openhpc节点用户管理
-# 加用户
+#### 加用户
 获取root
 
 ```
@@ -18,7 +18,7 @@ author = "unkcpz, qiusb"
 ```
 -m 参数是为了在home目录下创建用户文件夹；wwsh 与计算节点同步用户数据。
 
-#删除用户
+#### 删除用户
 获取root
 
 ```
