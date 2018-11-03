@@ -27,3 +27,12 @@ git push origin master -f
 
 # Come Back up to the Project Root
 cd ..
+
+# Add changes to source.
+git add .
+
+# Commit changes.
+git commit -m "$msg"
+
+# Push source.
+git push
