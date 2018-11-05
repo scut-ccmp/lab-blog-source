@@ -7,6 +7,29 @@ Categories = ["manual"]
 author = "unkcpz, qiusb"
 +++
 
+### openhpc节点用户管理
+#### 加用户
+获取root
+
+```
+[root] # useradd -m username
+[root] # passwd username
+[root] # wwsh file resync passwd shadow group
+```
+-m 参数是为了在home目录下创建用户文件夹；wwsh 与计算节点同步用户数据。
+
+#### 删除用户
+获取root
+
+```
+[root] # userdel username 
+[root] # more /etc/passwd 
+[root] # find / -name "*username*" 
+[root] # rm -rf dirname 
+```
+查看passwd是为了再次确认要删除该用户，接下来是找到与该用户有关的文件，并彻底删除。
+
+
 ### openhpc节点开机
 首先开启管理节点，使用管理节点的BMC口进入主板系统，也就是DELL的iDRAC，ip地址为
 (https://202.38.220.14).
