@@ -14,9 +14,9 @@ author = "unkcpz, qiusb"
 | xbyang_1 | 王yt, 廖jh |
 | xbyang_2 | 张hs       |
 | xbyang_3 |            |
-| xbyang_4 |            |
+| xbyang_4 | 程yh       |
 | xbyang_5 | 滕q        |
-| yjzhao_1 | 王yp       |
+| yjzhao_1 | 王yp, 汤jj  |
 | yjzhao_2 | 谢wq       |
 | yjzhao_3 |            |
 | yjzhao_4 | 杨sq       |
