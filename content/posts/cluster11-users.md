@@ -1,10 +1,10 @@
 ---
-title: "Issues_cluster11"
-date: 2018-08-08T15:07:34+08:00
-lastmod: 2018-08-08T15:54:13+08:00
+title: "hpc集群：用户手册"
+date: 2018-11-07T15:07:34+08:00
+lastmod: 2018-11-07T15:54:13+08:00
 draft: false
-tags: ["linux", "command", "11", "cluster"]
-categories: ["linux"]
+tags: ["cluster", "user", "11", "system"]
+categories: ["Manual"]
 author: "qiusb"
 ---
 
