@@ -144,14 +144,17 @@ pxe开机过程中会在网络中查找启动引导，找到后`wwnodescan`的�
 
 增加这些节点后，使用：
 ```sh
-[root] # wwsh node --groupadd cn99105 jp
+[root] # wwsh node set cn99107 --groupadd jp
 ```
 来将节点加入warewulf指定组做统一管理。
 
 #### after_nodefind
 成功加入节点后，使用`/home/mgt/after_nodefind.sh`运行后续配置，其中包括了一些内核配置。
 最为关键的是，该步骤重新识别所有的需要同步文件的计算节点列表，如果不做该步骤，则文件无法同步。
-
+#### 重启新增节点
+```
+[root] # ipmitool -E -I lanplus -H ${c_bmc[35]} -U ${bmc_username} chassis power reset
+```
 #### slurm配置
 slurm是集群的计算管理软件。在加入新机器后，需要在配置文件中加入新机器的信息。
 
