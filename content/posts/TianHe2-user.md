@@ -12,7 +12,7 @@ author = "unkcpz, qiusb"
 |----------|------------|
 | xbyang_1 |  廖jh      |
 | xbyang_2 | 张hs       |
-| xbyang_3 |            |
+| xbyang_3 |  谢wq      |
 | xbyang_4 | 程yh       |
 | xbyang_5 | 滕q        |
 | yjzhao_1 |           |
@@ -29,3 +29,8 @@ author = "unkcpz, qiusb"
 
 ## 私钥更新
 管理员交接时，将私钥统一交接，登录到每一个用户认证新的公钥私钥对。
+
+## 用户交接
+当用户转向另一个用户的时候，收回密钥，并更新公钥密钥对。
+
+同时删除帐号下所有数据。

@@ -22,10 +22,10 @@ author = "unkcpz, qiusb"
 获取root
 
 ```
-[root] # userdel username 
-[root] # more /etc/passwd 
-[root] # find / -name "*username*" 
-[root] # rm -rf dirname 
+[root] # userdel username
+[root] # more /etc/passwd
+[root] # find / -name "*username*"
+[root] # rm -rf dirname
 ```
 查看passwd是为了再次确认要删除该用户，接下来是找到与该用户有关的文件，并彻底删除。
 
@@ -167,3 +167,7 @@ slurm是集群的计算管理软件。在加入新机器后，需要在配置文
 
 使用`sinfo -Nel`查看节点信息，若节点为down，
 则使用`scontrol update nodename=cn99105 state=resume`开启这个节点状态。
+
+### （Optional）用户组管理
+实验室用户对所有节点都有使用权限，所以增加一个`labuser`用户组，对实验室用户都加入这个组。
+还分别建立了`admin`组用于管理员和其节点分区，还有`testuser`用户短期实用用户，只开放small分区以供提交，两周后收回帐号密码。
