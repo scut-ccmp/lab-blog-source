@@ -22,20 +22,20 @@ slurm脚本模板为`matlab_job.sh`：
 ```sh
 #!/bin/bash -l
 # NOTE the -l flag!
-#
+#SBATCH -o test.std_%j.out
 #SBATCH -J test
-#SBATCH -o test.output
-#SBATCH -e test.error.output
+#SBATCH -e test.error.out
 # Default in slurm
 # Request 5 hours run time
 #SBATCH -t 5:0:0
 # Requiest 1 node and 4 cores in partition normal
-#SBATCH -p normal -N 1 -n 4
+#SBATCH -p dellmid -N 1 -n 4
 # NOTE Each node has 12 cores
 
 module load matlab/R2016b
 
 matlab -nodisplay -nosplash -nojvm -r script
+
 ```
 其中前三个参数`-nodisplay`, `-nosplash`, `-nojvm`保证了在命令行中而不是用图形界面执行matlab。
 程序中使用并行时，`-singleCompThread`参数为程序中有并行代码时使用，确保了每个核不会多线程运行。由于matlab的
@@ -44,6 +44,8 @@ matlab -nodisplay -nosplash -nojvm -r script
 参数`-r`后面紧跟所要运行的`.m`文件的文件名<span style="color:red">！！！注意不要写后缀，否则会出错！！！</span>。
 
 将脚本与要执行的`.m`文件放在相同文件夹下，运行`sbatch ./matlab_job.sh`即可。
+
+注意这里`#SBATCH -o` 和`#SBATCH -e` 后面跟的是标准输出和错误输出, `%j`代表的是你提交任务的id号, 以防止找不到提交任务的文件夹. 
 
 ## 交互式的申请节点并进行matlab运算(not recommoned)
 
