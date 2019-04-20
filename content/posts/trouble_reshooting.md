@@ -34,3 +34,23 @@ ulimit -s unlimited
 
 除了自己的脚本和独特的软件,
 <span style="color:red">***切勿修改***`~/.bashrc`</span>!!!
+
+
+## Q2: 用户申请某个节点
+## A2:
+
+<span style="color:red">两次\<ctrl+D\>: 切记在运行完交互式任务后手动退出计算节点，退出计算节点后还要退出子命令行，否则节点持续被占用。</span>
+
+### Step 1
+首先使用`salloc -p short_q -N 1 -n 4`申请jpmid分区下1个节点4个核, `-n 4`可以省略不写, 默认占用全部的核数.
+
+用`squeue`查看申请到的是哪个节点，记住节点名称比如`cn97103`，使用`ssh cn97103`进入该计算节点。
+
+### Step 2
+加载`vasp`模块
+
+`module load vasp/5.4.4-impi-mkl`
+
+### Step 3
+运行`vasp`
+`mpirun -n 24 vasp_std`
