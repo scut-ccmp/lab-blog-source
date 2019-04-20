@@ -3,7 +3,7 @@ title: "使用slurm在集群上使用matlab"
 Description: 在集群上使用slurm任务管理系统，分别交互式的和提交任务式的使用matlab
 categories:
    - Manual
-date:  2018-05-21
+date:  2019-04-01
 tags:
   - cluster
   - matlab
@@ -29,7 +29,7 @@ slurm脚本模板为`matlab_job.sh`：
 # Request 5 hours run time
 #SBATCH -t 5:0:0
 # Requiest 1 node and 4 cores in partition normal
-#SBATCH -p dellmid -N 1 -n 4
+#SBATCH -p inter_q -N 1 -n 4
 # NOTE Each node has 12 cores
 
 module load matlab/R2016b
