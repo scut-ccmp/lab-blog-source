@@ -53,4 +53,4 @@ ulimit -s unlimited
 
 ### Step 3
 运行`vasp`
-`mpirun -n 24 vasp_std`
+`mpirun -n 4 vasp_std`
