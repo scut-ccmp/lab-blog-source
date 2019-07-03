@@ -18,6 +18,17 @@ author = "unkcpz, qiusb"
 ```
 -m 参数是为了在home目录下创建用户文件夹；wwsh 与计算节点同步用户数据。
 
+将一个已有用户 xxx 增加到一个已有用户组 lab 中，使此用户组成为该用户的附加用户组，可以使用带 -a 参数的 usermod  指令。-a 代表 append， 也就是将用户添加到新用户组中而不必离开原有的其他用户组。不过需要与 -G 选项配合使用：
+```
+useradd -a -G lab xxx
+```
+!当wwsh同步用户名等信息到计算节点失败时：
+```
+pdsh -w cn[节点名字]
+rm /tmp/.wwgetfiles_timestamp
+/warewulf/bin/wwgetfiles
+```
+
 #### 删除用户
 获取root
 
@@ -43,9 +54,9 @@ author = "unkcpz, qiusb"
 
 循环开启每个节点：
 ```sh
-[root] # for ((i=0; i<${num_computes}; i++)) ; do
-            do ipmitool -E -I lanplus -H ${c_bmc[$i]} -U ${bmc_username} chassis power reset
-          done
+[root] # wwsh 
+Warewulf> ipmi poweron cn[99101-99120]
+
 ```
 
 确定计算节点全部开启。
@@ -80,11 +91,7 @@ author = "unkcpz, qiusb"
 其中的`nodeinfo.sh`保存的是每一个计算节点的bmc和通信ip信息。
 
 循环关闭每个节点：
-```sh
-[root] # for ((i=0; i<${num_computes}; i++)) ; do
-            do ipmitool -E -I lanplus -H ${c_bmc[$i]} -U ${bmc_username} chassis power off
-          done
-```
+与上文开启类似poweron 改为poweroff即可。
 
 关闭等待计算节点全部关闭后，`shutdown -h now`关闭管理节点。
 
