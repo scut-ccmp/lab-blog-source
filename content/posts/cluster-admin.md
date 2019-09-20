@@ -20,7 +20,7 @@ author = "unkcpz, qiusb"
 
 将一个已有用户 xxx 增加到一个已有用户组 lab 中，使此用户组成为该用户的附加用户组，可以使用带 -a 参数的 usermod  指令。-a 代表 append， 也就是将用户添加到新用户组中而不必离开原有的其他用户组。不过需要与 -G 选项配合使用：
 ```
-useradd -a -G lab xxx
+usermod -a -G lab xxx
 ```
 !当wwsh同步用户名等信息到计算节点失败时：
 ```
