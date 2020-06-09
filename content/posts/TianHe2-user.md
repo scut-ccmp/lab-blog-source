@@ -11,7 +11,7 @@ author = "unkcpz, qiusb"
 | Account  | User       |
 |----------|------------|
 | xbyang_1 |  廖jh      |
-| xbyang_2 | 张hs       |
+| xbyang_2 | 周xy       |
 | xbyang_3 |  谢wq      |
 | xbyang_4 | 程yh       |
 | xbyang_5 | 何cc 刘lu  |
