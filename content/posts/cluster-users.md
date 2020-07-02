@@ -107,3 +107,17 @@ $ module unload vasp/5.4.4-impi-mkl
 ```
 
 装载环境后，则 ``$PATH`` 包含vasp执行路径，同时，赝势文件的路径为 ``$PPS_PATH`` 。
+
+
+#删除文件
+为了防止误删文件的发生, 我们把 `rm` 命令设置成将你要删除的文件或文件夹移到 `/home/scratch/$USER` 这个里面, `$USER` 代表你的用户名.
+例如:
+
+```bash
+rm -rf my_test_dir
+```
+
+你可以在 `/home/scratch/$USER` 这下面找到 `test_dir--07-02-20-10:26:20` 类似这样的文件夹, 后面的时间是你删除的时间. 因为删除的文件会占用一部分硬盘空间, 我们会定时清理 `/home/scratch` 文件夹.
+
+
+如果你想真的 `rm` 文件或文件夹, 使用命令 `/usr/bin/rm -rf my_test_dir` 就可以了.
