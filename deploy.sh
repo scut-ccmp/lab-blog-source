@@ -35,4 +35,4 @@ git add .
 git commit -m "$msg"
 
 # Push source.
-git push -f
+git push 
