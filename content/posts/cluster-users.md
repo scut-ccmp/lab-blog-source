@@ -121,3 +121,15 @@ rm -rf my_test_dir
 
 
 如果你想真的 `rm` 文件或文件夹, 使用命令 `/usr/bin/rm -rf my_test_dir` 就可以了.
+
+### 恢复文件
+使用命令 ``recovery_file`` 可以将移到回收站的文件或文件夹复原, 例如:
+
+```bash
+rm -rf main.py
+recovery_file /home/scratch/hecc/main.py-2020-08-12-13\:21\:29
+```
+删除了 `main.py` 文件以后, 使用 ``recovery_file`` 就可以将 `main.py` 文件移到当
+前文件夹. 如果你想将已经删除的文件移到它原本所在的文件夹, 加上 `-origin` 就可以了.
+
+附注:这两个命令都可以接受正则表达式的参数, 例如 ``rm -rf *; recovery_file /home/scratch/hecc/*`` 就可以删除所有文件或者还原所有文件.
