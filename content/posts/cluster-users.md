@@ -129,7 +129,8 @@ rm -rf my_test_dir
 rm -rf main.py
 recovery_file /home/scratch/hecc/main.py-2020-08-12-13\:21\:29
 ```
-删除了 `main.py` 文件以后, 使用 ``recovery_file`` 就可以将 `main.py` 文件移到当
-前文件夹. 如果你想将已经删除的文件移到它原本所在的文件夹, 加上 `-origin` 就可以了.
+删除了 `main.py` 文件以后, 使用 ``recovery_file`` 就可以将 `main.py` 文件移到原本的文件夹. 如果你想将已经删除的文件移
+到当前文件夹, 加上 `-current` 就可以了.
 
 附注:这两个命令都可以接受正则表达式的参数, 例如 ``rm -rf *; recovery_file /home/scratch/hecc/*`` 就可以删除所有文件或者还原所有文件.
+如果恢复文件的时候发现同名的文件或者文件夹会在名字后面加上 `-1`, 例如 `test` 会变成 `test-1`.
