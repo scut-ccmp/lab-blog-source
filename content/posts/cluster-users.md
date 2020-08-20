@@ -1,6 +1,6 @@
 ---
 title: cmp集群：用户手册
-author: unkcpz
+author: unkcpz / hecc
 date: 2020-08-20
 categories:
   - Manual
@@ -128,7 +128,7 @@ prepend_path("PATH","/opt/ohpc/pub/apps/matlab/R2019a/bin")
 help([[This is a MATLAB R2019a]])
 ```
 
-所以你只需要把 `/opt/ohpc/pub/apps/matlab/R2019a/bin` 加入路径就看有使用 `matlab` 了. 
+所以你只需要把 `/opt/ohpc/pub/apps/matlab/R2019a/bin` 加入路径就看有使用 `matlab` 了.
 
 
 在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交任务到节点。
