@@ -34,15 +34,19 @@ tags:
 可以使用`sinfo`查询当前分区，当前有五个分区，有三类机器。
 
 ```
-sinfo
-  super_q  up    5-00:00:00     12    32000        7  alloc cn[98101-98102,98104-98105,98107-98109]
-  super_q  up    5-00:00:00     12    32000        2   idle cn[98103,98106]
-   test_q  up       1:00:00     12    32000        2   idle cn[98110-98111]
-  inter_q  up    10-00:00:0     24    64000        2  alloc cn[99101-99102]
-    mid_q  up    5-00:00:00     24    64000       10  alloc cn[99103-99112]
-   long_q  up    10-00:00:0     24    64000        4  alloc cn[99113-99116]
-  short_q  up       6:00:00     24    64000        4  alloc cn[99117-99120]
-  wuzhou*  up    2-00:00:00     20   128000        9  alloc cn[97102-97110]
+[hecc@cmp ~]$ sinfo
+ PARTITION  AVAIL  TIMELIMIT   CPUS       MEMORY    NODES  STATE NODELIST
+   super_q  up    5-00:00:00     12        32000        7  alloc cn[98101-98102,98104-98105,98107-98109]
+   super_q  up    5-00:00:00     12        32000        2   idle cn[98103,98106]
+    test_q  up       1:00:00     12        32000        2   idle cn[98110-98111]
+   inter_q  up    10-00:00:0     24        64000        2  alloc cn[99101-99102]
+     mid_q  up    5-00:00:00     24        64000        8  alloc cn[99103,99105-99109,99111-99112]
+     mid_q  up    5-00:00:00     24        64000        2   idle cn[99104,99110]
+    long_q  up    10-00:00:0     24        64000        4  alloc cn[99113-99116]
+   short_q  up       6:00:00     24        64000        3  alloc cn[99117-99118,99120]
+   short_q  up       6:00:00     24        64000        1   idle cn99119
+   wuzhou*  up    2-00:00:00     20       128000        7  alloc cn[97102-97103,97105-97106,97108-97110]
+   wuzhou*  up    2-00:00:00     20       128000        2   idle cn[97104,97107]
 
 ```
 
@@ -111,7 +115,7 @@ mpirun -n ${SLURM_NPROCS} vasp_std
 # need source environment variables
 source /opt/ohpc/pub/mpi/intel/parallel_studio_xe_2018_update4/bin/compilervars.sh intel64
 export PATH="$PATH:/opt/ohpc/pub/apps/vasp/5.4.4-impi-mkl"
-
+echo 'This program is running at'  `hostname`
 mpirun -n ${SLURM_NPROCS} vasp_std
 ```
 
