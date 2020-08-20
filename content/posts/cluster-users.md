@@ -104,6 +104,17 @@ echo 'This program is running at'  `hostname`
 mpirun -n ${SLURM_NPROCS} vasp_std
 ```
 
+注意, 这里为了任务执行出现故障时方便找到是哪个节点出现了问题, 我们建议在任务脚本文
+件加入  `` echo 'This program is running at'  `hostname` ``, 这样就可以看到提交到哪个节点了.
+如果你希望在使用 `pyvasp` 的时候, 自动生成的脚本里面也加入这句话, 只需
+要在 `config.json` 文件里面的 `prepend` 里面加入这句话就可以了.
+
+```json
+{"potcar_path": {"paw_PBE": "/home/hecc/paw_PBE", "paw_LDA": "/opt/ohpc/pub/apps/vasp/pps/paw_LDA", "paw_PW91": "/opt/ohpc/pub/apps/vasp/pps/paw_PW91", "USPP_LDA": "/opt/ohpc/pub/apps/vasp/pps/USPP_LDA", "USPP_PW91": "/opt/ohpc/pub/apps/vasp/pps/USPP_PW91"}, "job": {"prepend": "module load vasp/5.4.4-impi-mkl;\necho 'This program is running at'  `hostname`", "exec": "mpirun -n ${SLURM_NPROCS} vasp_std","append":"exit"}}
+
+```
+
+
 ## wuzhou 节点
 由于 `wuzhou` 节点接入集群比较特殊, 所以提交到 `wuzhou` 节点上的任务脚本会有一点差别
 
@@ -132,19 +143,21 @@ prepend_path("PATH","/opt/ohpc/pub/apps/matlab/R2019a/bin")
 help([[This is a MATLAB R2019a]])
 ```
 
-所以你只需要把 `/opt/ohpc/pub/apps/matlab/R2019a/bin` 加入路径就看有使用 `matlab` 了.
+所以你只需要把 `/opt/ohpc/pub/apps/matlab/R2019a/bin` 加入路径就可以使用 `matlab` 了.
 
 
 在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交任务到节点。
 其中的所有`#SBATCH`后面的参数均可以在命令行中分开指定。
-<span style="color:red">*请根据任务的需求认真确定和选择`-p`和`-n`两个参数!!!*</span>
-<span style="color:red">*请根据任务的需求认真确定和选择准确评估任务上限时间!!!*</span>
+
+**请根据任务的需求认真确定和选择`-p`和`-n`两个参数!!!**
+
+**请根据任务的需求认真确定和选择准确评估任务上限时间!!!**
 
 ```sh
 $ sbatch job.sh
 ```
 
-<span style="color:red">*若要提交任务到指定节点，或交互式运行任务，请参考管理员手册，或直接咨询管理员。*</span>
+**若要提交任务到指定节点，或交互式运行任务，请参考管理员手册，或直接咨询管理员。**
 
 ### (OPTIONAL) 超算任务提交
 超算同样使用`SLURM`作为任务管理系统。
