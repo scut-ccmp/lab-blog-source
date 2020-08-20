@@ -34,6 +34,7 @@ tags:
 可以使用`sinfo`查询当前分区，当前有五个分区，有三类机器。
 
 ```
+sinfo
   super_q  up    5-00:00:00     12    32000        7  alloc cn[98101-98102,98104-98105,98107-98109]
   super_q  up    5-00:00:00     12    32000        2   idle cn[98103,98106]
    test_q  up       1:00:00     12    32000        2   idle cn[98110-98111]
@@ -114,7 +115,20 @@ export PATH="$PATH:/opt/ohpc/pub/apps/vasp/5.4.4-impi-mkl"
 mpirun -n ${SLURM_NPROCS} vasp_std
 ```
 
+类似地, 如果你想运行 `matlab` , 使用 `module show ` 可以看到该 `module` 的一些具体信息, 例如:
 
+```bash
+module show matlab/R2019a
+
+------------------------------------------------------------------------------------------------------
+   /opt/ohpc/pub/modulefiles/matlab/R2019a:
+------------------------------------------------------------------------------------------------------
+conflict("gcc")
+prepend_path("PATH","/opt/ohpc/pub/apps/matlab/R2019a/bin")
+help([[This is a MATLAB R2019a]])
+```
+
+所以你只需要把 `/opt/ohpc/pub/apps/matlab/R2019a/bin` 加入路径就看有使用 `matlab` 了. 
 
 
 在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交任务到节点。
