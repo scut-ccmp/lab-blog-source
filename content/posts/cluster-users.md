@@ -1,7 +1,7 @@
 ---
 title: cmp集群：用户手册
 author: unkcpz
-date: 2018-08-13
+date: 2020-08-20
 categories:
   - Manual
 tags:
@@ -10,40 +10,62 @@ tags:
 ---
 
 ## 集群名称和描述
-现有两组集群，分别是：
-  1. 原先的五舟机器，采用SGE任务管理，安装Rocks6.1.1操作系统。
-  2. 新建的集群，采用SLURM任务管理，安装CentOS 7.5操作系统，使用openhpc仓库的`WareWulf`集群管理软件。
+
+现有的集群采用SLURM任务管理，安装CentOS 7.5操作系统，使用openhpc仓库的`WareWulf`集群管理软件。
 
 <!--more-->
 
-五舟的集群依照惯例称为<span style="color:red">'28'</span>，
-实际的IP为`202.38.220.11:22`。
-新建的集群称为<span style="color:red">'cmp集群'</span>，IP为`202.38.220.15:22`。
 
-### 用户的分类
-28保持原有全部设置，数据也不进行迁移，主要提供给即将毕业的同学使用，保证他们的正常使用，无需重新
-适应新的集群。且该集群速度较快，支持IB网络，适用于大体系的计算和跨节点并行。
+现有的集群称为<span style="color:red">'cmp集群'</span>，IP为`202.38.220.15:22`。
 
-cmp集群提供给新生和有折腾意愿的同学和老师使用。将来会将所有新加入节点都接入该集群统一管理，
-统一使用相同的任务管理和集群管理软件，方便用户的学习和管理员的交接。该节点单核性能较差，但核数
-较多。缺点在于由于缺少IB网络的支持，跨节点并行的性能上不能达到倍数的增长。
+
+## 用户常用的操作
+
+- 登录服务器, `windows` 用户使用 Xmanager 或者 MobaXterm, 他们都包含了登录服务器和上传下载文件的功能, qq群里面都可以下载, 使用文档自行百度吧.
+
+![](https://raw.githubusercontent.com/ChangChunHe/Sundries/master/baidu-1.png)
+![](https://raw.githubusercontent.com/ChangChunHe/Sundries/master/baidu-2.jpg)
+
+- 你需要熟悉一些基本的 `linux` 操作, 基本教程的pdf版本也可有在qq群里面下载.
+
+
 
 ### cmp集群分区信息
 可以使用`sinfo`查询当前分区，当前有五个分区，有三类机器。
 
-- inter_q: 景派机器，每节点24个物理核，64G内存。在用节点2个。cn[99101-99102]
-- short_q: 景派提供的四子星机器，每节点24物理核，64G内存。在用节点4个。cn[99103-99106]
-- normal_q: DELL r610机器，每节点12物理核，32G内存。在用节点22个。cn[98101-98122]
-- long_q: 景派机器，每个节点24物理核，64G内存。在用节点10个。cn[99107-99116]
-- para_q: 五舟机器，每个节点20物理核，128G内存。在用节点8个。cn[]
+```
+  super_q  up    5-00:00:00     12    32000        7  alloc cn[98101-98102,98104-98105,98107-98109]
+  super_q  up    5-00:00:00     12    32000        2   idle cn[98103,98106]
+   test_q  up       1:00:00     12    32000        2   idle cn[98110-98111]
+  inter_q  up    10-00:00:0     24    64000        2  alloc cn[99101-99102]
+    mid_q  up    5-00:00:00     24    64000       10  alloc cn[99103-99112]
+   long_q  up    10-00:00:0     24    64000        4  alloc cn[99113-99116]
+  short_q  up       6:00:00     24    64000        4  alloc cn[99117-99120]
+  wuzhou*  up    2-00:00:00     20   128000        9  alloc cn[97102-97110]
 
-每个分组有不同的任务时长限制，inter_q主要是matlab脚本计算，可以申请1:24个核计算，避免申请一个节点却只有一个核计算的浪费；short_q时间较短，
-主要是vasp的测试任务和一些计算量小的任务；para_q是唯一可以进行跨节点计算的分区，针对大体系计算。
+```
 
-`sinfo -Nel`可以查看更多的信息, 更多可参见[这里](http://geco.mines.edu/prototype/manpages/sinfo.html).
+- super_q: 每节点12个物理核，32G内存。在用节点9个。cn[98101-98109]
+- test_q: 每节点12个物理核，32G内存。在用节点2个。cn[98110-98111]
+- inter_q: 每节点24个物理核，64G内存。在用节点2个。cn[99101-99102]
+- mid_q: 每节点24物理核，64G内存。在用节点10个。cn[99103-99112]
+- long_q: 每个节点24物理核，64G内存。在用节点4个。cn[99113-99116]
+- short_q: 每节点24物理核，64G内存。在用节点4个。cn[99117-99120]
+- wuzhou:  每个节点20物理核，128G内存。在用节点9个。cn[97102-97110]
 
-## 赝势所在路径
-``/opt/ohpc/pub/apps/vasp/pps``
+每个分组有不同的任务时长限制，inter_q 主要是 `matlab` 脚本计算，可以申请1:24个核计算，避免申请一个节点却只有一个核计算的浪费；short_q时间较短，
+主要是vasp的测试任务和一些计算量小的任务。
+
+
+## vasp相关
+
+- 赝势所在路径:``/opt/ohpc/pub/apps/vasp/pps``
+- `vasp` 版本: 现有的是 5.4.4 和 5.4.1, 建议用5.4.4
+- 如果你需要特殊的版本可以联系管理员编译, 如果你可以自己编译那就更好了. 集群上装了 `intel` 的编译器, `mkl` 数学库, 大家有兴趣看有自己研究一下.
+建议使用 `module load intel-compiler/2018_update4` 的2018的编译器 和 `module load intel/mkl/2019_update5` 的数学库.
+
+
+
 
 ## 任务管理系统`SLURM`使用
 
@@ -58,23 +80,43 @@ cmp集群提供给新生和有折腾意愿的同学和老师使用。将来会�
 
 ### `SLURM`脚本提交模板
 ```bash
-#!/bin/bash -l
-# NOTE the -l flag!
+#!/bin/bash
+
 #
 #SBATCH -J NAME
 # Default in slurm
 # Request 5 hours run time
 #SBATCH -t 5:0:0
 #
-#SBATCH -p small -N 1 -n 12
-# NOTE Each small node has 12 cores
+#SBATCH -p short_q -N 1 -n 24
+# NOTE Each short_q node has 24 cores
 #
 
-module load vasp/5.4.4-impi-mkl
-
 # add your job logical here!!!
-mpirun -n 12 vasp_std
+module load vasp/5.4.4-impi-mkl
+# we  suggest you add this command to exactly know which node you are using
+echo 'This program is running at'  `hostname`
+mpirun -n ${SLURM_NPROCS} vasp_std
 ```
+
+## wuzhou 节点
+由于 `wuzhou` 节点接入集群比较特殊, 所以提交到 `wuzhou` 节点上的任务脚本会有一点差别
+
+```bash
+#!/bin/bash
+#SBATCH -J task2
+#SBATCH -p wuzhou -N 1 -n 20
+
+# need source environment variables
+source /opt/ohpc/pub/mpi/intel/parallel_studio_xe_2018_update4/bin/compilervars.sh intel64
+export PATH="$PATH:/opt/ohpc/pub/apps/vasp/5.4.4-impi-mkl"
+
+mpirun -n ${SLURM_NPROCS} vasp_std
+```
+
+
+
+
 在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交任务到节点。
 其中的所有`#SBATCH`后面的参数均可以在命令行中分开指定。
 <span style="color:red">*请根据任务的需求认真确定和选择`-p`和`-n`两个参数!!!*</span>
