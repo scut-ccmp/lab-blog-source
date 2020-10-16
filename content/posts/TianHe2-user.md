@@ -17,7 +17,7 @@ author = "unkcpz, qiusb"
 | xbyang_5 | 何cc 刘lu  |
 | yjzhao_1 | 彭yh      |
 | yjzhao_2 |   蒋yl     |
-| yjzhao_3 |           |
+| yjzhao_3 |   黄mx        |
 | yjzhao_4 | 杨sq       |
 | yjzhao_5 | 余js          |
 
