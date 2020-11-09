@@ -61,16 +61,12 @@ Warewulf> ipmi poweron cn[99101-99120]
 
 确定计算节点全部开启。
 ```sh
-[root] # for ((i=0; i<${num_computes}; i++)); do
-            pdsh -w ${c_name[$i]} uptime
-         done
+[root] # pdsh -w cn[99101-99120,98101-98110] uptime
 ```
 
 确定所有可用节点均开机后，开启计算节点的`slurmd`服务：
 ```sh
-[root] # for ((i=0; i<${num_computes}; i++)) ; do
-            pdsh -w ${c_name[$i]} systemctl start slurmd
-          done
+[root] # pdsh -w cn[99101-99120,98101-98110] systemctl start slurmd
 ```
 
 再开启管理节点`slurmctld`服务：
