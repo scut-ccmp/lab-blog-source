@@ -19,7 +19,7 @@ author = "unkcpz, qiusb"
 | yjzhao_2 |   蒋yl     |
 | yjzhao_3 |   黄mx        |
 | yjzhao_4 | 杨sq       |
-| yjzhao_5 | 余js          |
+| yjzhao_5 | 余js  陈wy        |
 
 用户使用要求：
 
