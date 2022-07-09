@@ -6,7 +6,6 @@ categories:
 date:  2022-07-09
 tags:
   - cluster
-  - python
 author: cenyj
 ---
 
