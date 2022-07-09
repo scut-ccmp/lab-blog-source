@@ -6,7 +6,7 @@ categories:
 date:  2022-07-09
 tags:
   - cluster
-  - matlab
+  - python
 author: cenyj
 ---
 
