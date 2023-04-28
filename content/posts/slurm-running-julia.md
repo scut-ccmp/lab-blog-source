@@ -1,16 +1,16 @@
 ---
-title: "使用slurm在集群上使用matlab"
+title: "使用slurm在集群上使用julia"
 Description: 在集群上使用slurm任务管理系统，分别交互式的和提交任务式的使用matlab
 categories:
    - Manual
 date:  2019-04-01
 tags:
   - cluster
-  - matlab
-author: unkcpz
+  - julia
+author: Huang weijie
 ---
 
-## 以任务的方式提交matlab任务(recommoned)
+## 以任务的方式提交julia任务(recommoned)
 
 - <span style="color:red">切记在要运行的 `.m` 文件的结尾加入 `quit`， 否则在任务结束后无法释放节点。</span>
 
