@@ -43,7 +43,7 @@ julia -t 40 ./Operator-j-BLP-v2-applycutoff=1E-6-2023-3-15-V=3-longTime.jl
 
 ### Step 2
 `julia -t -6`
-打开repl 模式的julia，可以在这里查看文件版本，也可以运行简单的测试程序。
+打开repl 模式的julia，可以在这里查看库函数的版本，也可以运行简单的测试程序。
 
 
 ## julia 程序输出的slurm不会及时更新问题
