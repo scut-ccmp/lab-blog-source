@@ -1,6 +1,6 @@
 ---
 title: cmp集群：用户手册
-author: unkcpz / hecc
+author: unkcpz / hecc /cenyj
 date: 2020-08-20
 categories:
   - Manual
@@ -23,15 +23,13 @@ tags:
 
 - 登录服务器, `windows` 用户使用 Xmanager 或者 MobaXterm, 他们都包含了登录服务器和上传下载文件的功能, qq群里面都可以下载, 使用文档自行百度吧.
 
-![](https://raw.githubusercontent.com/ChangChunHe/Sundries/master/baidu-1.png)
-![](https://raw.githubusercontent.com/ChangChunHe/Sundries/master/baidu-2.jpg)
 
 - 你需要熟悉一些基本的 `linux` 操作, 基本教程的pdf版本也可有在qq群里面下载.
 
 
 
 ### cmp集群分区信息
-可以使用`sinfo`查询当前分区，当前有五个分区，有三类机器。
+可以使用`sinfo`查询当前分区，当前有五个分区，有四类机器。
 
 ```
 [hecc@cmp ~]$ sinfo
@@ -47,6 +45,10 @@ tags:
    short_q  up       6:00:00     24        64000        1   idle cn99119
    wuzhou*  up    2-00:00:00     20       128000        7  alloc cn[97102-97103,97105-97106,97108-97110]
    wuzhou*  up    2-00:00:00     20       128000        2   idle cn[97104,97107]
+   sonmi_1  up    5-00:00:00     40       256000        3  allocated  cn[96101-96103]
+   sonmi_2  up    40-00:00:00    40       256000        2  allocated  cn[96104-96105]
+   sonmi_2  up    40-00:00:00    40       256000        1  idle       cn96106
+   sonmi_96* up   10-00:00:00    96       1000000       1  allocated  cn96100
 
 ```
 
@@ -57,14 +59,21 @@ tags:
 - long_q: 每个节点24物理核，64G内存。在用节点4个。cn[99113-99116]
 - short_q: 每节点24物理核，64G内存。在用节点4个。cn[99117-99120]
 - wuzhou:  每个节点20物理核，128G内存。在用节点9个。cn[97102-97110]
+- sonmi_1: 每个节点40个物理核，256G内存。在用节点3个。cn[96101-103]
+- sonmi_2: 每个节点40个物理核，256G内存。在用节点3个。cn[96101-103]
+- sonmi_96: 96个物理核，1T内存。cn96100
+
+
 
 每个分组有不同的任务时长限制，inter_q 主要是 `matlab` 脚本计算，可以申请1:24个核计算，避免申请一个节点却只有一个核计算的浪费；short_q时间较短，
 主要是vasp的测试任务和一些计算量小的任务。
 
 
 ## vasp相关
-
-- 赝势所在路径:``/opt/ohpc/pub/apps/vasp/pps``
+- 加载vasp模块：
+`module load vasp/5.4.4-impi-mkl`
+- 查看赝势所在路径:
+`echo $PPS_PATH`
 - `vasp` 版本: 现有的是 5.4.4 和 5.4.1, 建议用5.4.4
 - 如果你需要特殊的版本可以联系管理员编译, 如果你可以自己编译那就更好了. 集群上装了 `intel` 的编译器, `mkl` 数学库, 大家有兴趣看有自己研究一下.
 建议使用 `module load intel-compiler/2018_update4` 的2018的编译器 和 `module load intel/mkl/2019_update5` 的数学库.
@@ -113,49 +122,45 @@ mpirun -n ${SLURM_NPROCS} vasp_std
 {"potcar_path": {"paw_PBE": "/home/hecc/paw_PBE", "paw_LDA": "/opt/ohpc/pub/apps/vasp/pps/paw_LDA", "paw_PW91": "/opt/ohpc/pub/apps/vasp/pps/paw_PW91", "USPP_LDA": "/opt/ohpc/pub/apps/vasp/pps/USPP_LDA", "USPP_PW91": "/opt/ohpc/pub/apps/vasp/pps/USPP_PW91"}, "job": {"prepend": "module load vasp/5.4.4-impi-mkl;\necho 'This program is running at'  `hostname`", "exec": "mpirun -n ${SLURM_NPROCS} vasp_std","append":"exit"}}
 
 ```
-
-
-## wuzhou 节点
-由于 `wuzhou` 节点接入集群比较特殊, 所以提交到 `wuzhou` 节点上的任务脚本会有一点差别
-
-```bash
-#!/bin/bash
-#SBATCH -J task2
-#SBATCH -p wuzhou -N 1 -n 20
-
-# need source environment variables
-source /opt/ohpc/pub/mpi/intel/parallel_studio_xe_2018_update4/bin/compilervars.sh intel64
-export PATH="$PATH:/opt/ohpc/pub/apps/vasp/5.4.4-impi-mkl"
-echo 'This program is running at'  `hostname`
-mpirun -n ${SLURM_NPROCS} vasp_std
-```
-
-类似地, 如果你想运行 `matlab` , 使用 `module show ` 可以看到该 `module` 的一些具体信息, 例如:
-
-```bash
-module show matlab/R2019a
-
-------------------------------------------------------------------------------------------------------
-   /opt/ohpc/pub/modulefiles/matlab/R2019a:
-------------------------------------------------------------------------------------------------------
-conflict("gcc")
-prepend_path("PATH","/opt/ohpc/pub/apps/matlab/R2019a/bin")
-help([[This is a MATLAB R2019a]])
-```
-
-所以你只需要把 `/opt/ohpc/pub/apps/matlab/R2019a/bin` 加入路径就可以使用 `matlab` 了.
-
-
-在工作目录中写入该文件，保存名称如`job.sh`,在命令行中运行以下命令即可提交任务到节点。
-其中的所有`#SBATCH`后面的参数均可以在命令行中分开指定。
-
 **请根据任务的需求认真确定和选择`-p`和`-n`两个参数!!!**
 
 **请根据任务的需求认真确定和选择准确评估任务上限时间!!!**
 
+在完成以上的job.sh文件后，可以通过以下命令将该任务提交到计算节点：
 ```sh
 $ sbatch job.sh
 ```
+
+**若要提交任务到指定节点，或交互式运行任务，请参考管理员手册，或直接咨询管理员。**
+
+
+
+
+## 集群上的其他模块
+你可以使用`module avail`查看集群上已安装的软件信息
+```bash
+------------------------------------------ /usr/share/Modules/modulefiles ------------------------------------------
+dot         module-git  module-info modules     null        use.own
+
+--------------------------------------------- /share/apps/modulefiles ----------------------------------------------
+atat/3.36                          julia/1.8.5                        spglib.1.0
+bader                              lammps/20190807-intel              spglib.2.0
+calypso                            lammps/20210612-intel              vasp/5.4.1-impi-mkl
+gaussian/16                        latmat                             vasp/5.4.4-impi-mkl
+intel-2023/intel-2023              matlab/R2015b                      vasp/6.1.2-impi-mkl
+intel-2023/intel_compiler_2023.0.0 matlab/R2016b                      vasp/6.3.0-impi-mkl
+intel-2023/intel_mkl_2023.0.0      matlab/R2019a                      vasp/6.3.0-new
+intel-2023/intel_mpi_2021.8.0      matlab/R2019b                      vasp/6.4.0-impi-mkl
+intel-compiler/2017_update7        multiwfn                           vasp2trace/v1
+intel-compiler/2018_update4        QE/6.1.0-intel                     vesta
+intel-compiler/2019_update5        QE/6.4.0-intel                     vtstscripts/935
+intel-mkl/2017                     QE/6.5                             vtstscripts/964
+intel-mkl/2018                     shengBTE
+
+```
+类似vasp的使用，也可以通过`module load xxx` 加载这些软件，关于软件具体的使用应查阅官网。
+
+
 
 **若要提交任务到指定节点，或交互式运行任务，请参考管理员手册，或直接咨询管理员。**
 
@@ -165,11 +170,14 @@ $ sbatch job.sh
 ## `module`软件模块挂载
 所有的软件为了保证编译和使用环境互不冲突，使用`module`作为模块管理软件。
 
-### 常用命令
+### 常用其他命令
 
 ```bash
-查找可用模块
-$ module avile
+查看任务队列
+$ squeue
+
+取消正在计算的任务
+$ scancel 85035
 
 显示已加载模块
 $ module list
