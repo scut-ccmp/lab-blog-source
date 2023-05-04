@@ -136,12 +136,12 @@ ipmitool  -I lanplus -H  ip -U admin -P lfpara2022..@ reset cold
 ipmitool -I lanplus -H ip -U admin -P lfpara2022..@ power off
 ```
 
-具体的每台节点的[ip]()。
+具体的每台节点的[ip](https://github.com/scut-ccmp/lab-blog-source/blob/master/static/ip.txt)。
 
 
 
 
-#### 一些重要的文件路径
+#### 一些重要的文件位置
 软件的压缩包/项目文件放这里：
 ```
 /share/apps/softwares/
