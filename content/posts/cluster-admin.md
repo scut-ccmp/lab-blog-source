@@ -88,8 +88,113 @@ slurm是集群的计算管理软件。在加入新机器后，需要在配置文
 [root] # scontrol update NodeName=<node> State=resume
 ```
 
+##### 修改用户可用内存
+先进入root，
+```
+edquota -u cenyj
+
+```
+修改其中的hard项，具体每项的含义可以自行查询。
 
 
-### （Optional）用户组管理
-实验室用户对所有节点都有使用权限，所以增加一个`labuser`用户组，对实验室用户都加入这个组。
-还分别建立了`admin`组用于管理员和其节点分区，还有`testuser`用户短期实用用户，只开放small分区以供提交，两周后收回帐号密码。
+#### ipmi配置（主要用于远程开关机）：
+
+##### BMC配置命令
+```
+ipmitool lan print 1 #打印当前ipmi 地址配置信息。
+ipmitool lan set 1 ipsrc static  # 设置 id 1 为静态IP地址。
+ipmitool lan set 1 ipaddr ip  # 设置 IPMI 地址。
+ipmitool lan set 1 netmask 255.255.255.0 # 设置 IPMI 子网掩码。
+ipmitool lan set 1 defgw ipaddr ip # 设置 IPMI 网关。
+
+Ipmitool user list 1  # 显示 IPMI 用户列表。
+ipmitool user set name 2 admin #创建用户，一般服务器有默认的超级用户（root,admin,ADMIN）,可以直接修改超级用户的密码，不用重新创建。
+ipmitool user set password 3 lfpara2022..@ #创建密码
+ipmitool channel setaccess 1 3 callin=on ipmi=on link=on privilege=4 #开权限 
+ipmitool user list 1 # 查看chanenel1的用户信息
+```
+
+
+获取当前的电源状态：
+```
+ipmitool -I lan -H ip -U admin -P lfpara2022..@ power status
+```
+开机：
+```
+ipmitool -I lanplus -H ip -U admin -P lfpara2022..@ power on #如果服务器已经是在开机的情况下，再执行这个命令，服务器是不会重启的
+```
+重启：
+```
+ipmitool -I lanplus -H ip -U admin -P lfpara2022..@ power reset #注意：机器在关机的情况下，这个reset命令用不了的。
+```
+冷重启：
+```
+ipmitool  -I lanplus -H  ip -U admin -P lfpara2022..@ reset cold 
+```
+关机：
+```
+ipmitool -I lanplus -H ip -U admin -P lfpara2022..@ power off
+```
+
+具体的每台节点的[ip]()。
+
+
+
+
+#### 一些重要的文件路径
+软件的压缩包/项目文件放这里：
+```
+/share/apps/softwares/
+```
+软件对应的module模块的文件位置（需要配置该文件才能在module模块中使用）：
+```
+/share/apps/modulefiles/
+```
+
+
+slurm配置文件路径：
+```
+/etc/slurm/slurm.conf
+/usr/lib/systemd/system/slurmd.service
+```
+服务器登陆日志路径：
+```
+/var/log/secure
+```
+该网页的github项目：
+```
+https://github.com/scut-ccmp/lab-blog-source
+```
+
+#### 其他可能用到的命令：
+查看当前网络配置/网关地址：
+```
+netstat -r
+```
+查看UDP/TCP的开放端口：
+```
+netstat -nupl
+netstat -ntpl
+```
+
+查看某个用户的所有进程：
+```
+ps -u cenyj
+```
+查看一级目录下的每个文件的硬盘占用：
+```
+du -h --max-depth=1
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
